@@ -5,7 +5,7 @@
     
           <StackLayout ios:horizontalAlignment="center" 
     android:horizontalAlignment="left" orientation="horizontal">
-          <Image src="res://logo" width="40" height="40"></Image>
+          <Image src="res://icon" width="40" height="40"></Image>
         </StackLayout>
         </ActionBar>
         <StackLayout>
