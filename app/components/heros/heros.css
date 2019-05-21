@@ -1,0 +1,24 @@
+
+    ActionBar {
+        background-color: #8B0000;
+        color: #ffffff;
+    }
+
+    .message {
+        vertical-align: center;
+        text-align: center;
+        font-size: 30;
+        margin-top: 5px;
+        color: #333333;
+    }
+    .title {
+        vertical-align: center;
+        text-align: center;
+        font-size: 50;
+        color: #8B0000;
+    }
+    RadListView StackLayout {
+      margin-top: -90px;
+      color:#ffffff;
+      background-color:rgba(0,0,0,0.4);
+    }
