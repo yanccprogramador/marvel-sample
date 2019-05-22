@@ -4,21 +4,25 @@
           <StackLayout ios:horizontalAlignment="center"
     android:horizontalAlignment="left" orientation="horizontal">
           <Image src="res://icon" width="40" height="40"></Image>
-          <SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" />
+          <android><SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" />
+          </android>
           </StackLayout>
         </ActionBar>
+
         <GridLayout columns="*" rows="*">
-            <RadListView v-show="loading==false" layout="grid" ref="listView"  for="item in characters" @itemTap="itemTap($event)" >
-              <v-template>
+        <ios>
+            <SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" />
+          </ios>
+        
+            <ListView separatorColor="transparent" v-show="loading==false" layout="grid" ref="listView"  for="item in characters" @itemTap="itemTap($event)" >
+              <v-template >
                 <!-- Shows the list item label in the default color and style. -->
-                <FlexboxLayout flexDirection="column" class="item" height="200">
-                  <Image :src="item.thumbnail.path+'.'+item.thumbnail.extension" stretch="aspectFit" height="200" width="200"/>
-                <StackLayout class="boxMarvel" >
-                <Label :text="item.name" fontSize="25" textWeight="bold" />
+                <StackLayout class="boxMarvel" orientation="horizontal">
+                  <Image :src="item.thumbnail.path+'.'+item.thumbnail.extension" stretch="aspectFit" height="50" width="50" class="circle"/>
+                <Label :text="item.name" class="message" fontSize="25" textWeight="bold" />
                 </StackLayout>
-                </FlexboxLayout>
-              </v-template>
-            </RadListView >
+                 </v-template>
+            </ListView>
             <Label text="Carregando... Aguarde...." v-show="loading"></Label>
         </GridLayout>
     </Page>
@@ -29,7 +33,6 @@ import * as platform from 'tns-core-modules/platform'
 import * as color from 'tns-core-modules/color'
 import * as http from 'tns-core-modules/http'
 import Heros from '@/components/heros/Heros'
-import * as axios from 'axios'
 import md5 from 'md5';
   export default {
     data() {
@@ -54,7 +57,7 @@ import md5 from 'md5';
       async onTextChanged(){
         this.loading=true
          let ts=Math.floor((new Date()).getTime()/1000)
-         axios.getJSON('https://gateway.marvel.com/v1/public/characters?apikey=027975859a3e06d3e4124a9ede0954ac&ts='+ts+'&hash='+md5(ts+'0d51481b1d7be3b3da3384f196a183b7ac064b50'+'027975859a3e06d3e4124a9ede0954ac')+'&nameStartsWith='+this.name).then((data)=>{
+         http.getJSON('https://gateway.marvel.com/v1/public/characters?apikey=027975859a3e06d3e4124a9ede0954ac&ts='+ts+'&hash='+md5(ts+'0d51481b1d7be3b3da3384f196a183b7ac064b50'+'027975859a3e06d3e4124a9ede0954ac')+'&nameStartsWith='+this.name).then((data)=>{
            this.characters=data.data.results
            this.loading=false
          })
@@ -82,9 +85,9 @@ import md5 from 'md5';
         font-size: 20;
         color: #333333;
     }
-    RadListView StackLayout {
-      margin-top: -90px;
-      color:#ffffff;
-      background-color:rgba(0,0,0,0.4);
+    .circle{
+      border:1px solid darkred;
+      border-radius:70px;
+      margin-right:5px;
     }
 </style>
