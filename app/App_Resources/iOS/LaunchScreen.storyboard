@@ -43,7 +43,7 @@
         </scene>
     </scenes>
     <resources>
-        <iamge name="LaunchScreen-AspectFill" width="768" height="1024"/>
+        <image name="LaunchScreen-AspectFill" width="768" height="1024"/>
         <image name="LaunchScreen.Center" width="40" height="40"/>
     </resources>
 </document>

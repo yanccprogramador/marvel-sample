@@ -3,28 +3,31 @@
         <ActionBar backgroundColor="#8B0000">
           <StackLayout ios:horizontalAlignment="center"
     android:horizontalAlignment="left" orientation="horizontal">
-          <Image src="res://icon" width="40" height="40"></Image>
+          <Image src="~/assets/images/logo.png" width="40" height="40"></Image>
           <android><SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" />
           </android>
+          <ios>
+            <Label text="Marvel Sample"/>
+          </ios>
           </StackLayout>
         </ActionBar>
 
-        <GridLayout columns="*" rows="*">
+        <StackLayout columns="*" rows="*">
         <ios>
-            <SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" />
+            <SearchBar hint="Busque personagem" v-model ="name" @submit="onTextChanged" style="background-color:white;margin-bottom:20px" />
           </ios>
         
-            <ListView separatorColor="transparent" v-show="loading==false" layout="grid" ref="listView"  for="item in characters" @itemTap="itemTap($event)" >
+            <ListView separatorColor="transparent" v-show="loading==false" ref="listView"  for="item in characters" @itemTap="itemTap($event)" >
               <v-template >
                 <!-- Shows the list item label in the default color and style. -->
-                <StackLayout class="boxMarvel" orientation="horizontal">
-                  <Image :src="item.thumbnail.path+'.'+item.thumbnail.extension" stretch="aspectFit" height="50" width="50" class="circle"/>
-                <Label :text="item.name" class="message" fontSize="25" textWeight="bold" />
+                <StackLayout style="margin:10" class="boxMarvel" orientation="horizontal">
+                  <Image v-if="item.thumbnail!=undefined" :src="item.thumbnail.path+'.'+item.thumbnail.extension" stretch="aspectFit" height="50" width="50" class="circle"/>
+                <Label v-if="item.name!=undefined" :text="item.name" class="message" fontSize="25" textWeight="bold" />
                 </StackLayout>
                  </v-template>
             </ListView>
             <Label text="Carregando... Aguarde...." v-show="loading"></Label>
-        </GridLayout>
+        </StackLayout>
     </Page>
 </template>
 <script >
